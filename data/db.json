@@ -1,0 +1,16 @@
+{
+  "listings": [],
+  "users": [
+    {
+      "id": 1792338005937,
+      "phone": "1111111111",
+      "name": "ttsr rfre   rr",
+      "createdAt": "2026-10-18T15:40:05.937Z"
+    }
+  ],
+  "walletInfo": {
+    "provider": "محفظة جيب",
+    "accountNumber": "3308947",
+    "holder": "مالك منصة حراج اليمن"
+  }
+}

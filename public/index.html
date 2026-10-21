@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حراج اليمن Pro | السوق التجاري المتكامل</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background: #f8fafc; color: #1e293b; }
+        .cheerful-gradient { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .gold-badge { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .card { background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(37, 99, 235, 0.15); }
+    </style>
+</head>
+<body class="pb-24">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-3">
+            <h1 class="text-2xl font-black text-blue-600">حراج <span class="text-amber-500">اليمن</span></h1>
+            <span class="text-xs bg-blue-100 text-blue-700 font-bold px-2.5 py-1 rounded-full">PRO</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="openAuthModal()" id="authBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2 rounded-xl font-bold text-sm transition">تسجيل الدخول</button>
+            <button onclick="openPostModal()" class="cheerful-gradient text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/20 hover:opacity-95 transition">+ أضف إعلان</button>
+        </div>
+    </nav>
+
+    <!-- Rotating Carousel for Promoted Ads (10 seconds interval) -->
+    <section class="max-w-7xl mx-auto px-6 pt-6">
+        <div class="w-full h-72 md:h-96 rounded-3xl overflow-hidden shadow-2xl relative bg-slate-950" id="carouselContainer">
+            <!-- Carousel items injected dynamically -->
+        </div>
+    </section>
+
+    <!-- Search & Filter Bar -->
+    <section class="max-w-7xl mx-auto px-6 pt-8">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-4">
+            <input type="text" id="searchInput" oninput="filterListings()" placeholder="ابحث عن سيارة، عقار، جهاز..." class="flex-1 bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-slate-800 font-medium outline-none focus:border-blue-600">
+            <select id="categoryFilter" onchange="filterListings()" class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-slate-800 font-medium outline-none">
+                <option value="">جميع التصنيفات</option>
+                <option value="سيارات">سيارات</option>
+                <option value="عقارات">عقارات</option>
+                <option value="إلكترونيات">إلكترونيات</option>
+                <option value="وظائف">وظائف</option>
+                <option value="أخرى">أخرى</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Listings Section -->
+    <main class="max-w-7xl mx-auto px-6 pt-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-black text-slate-800 border-r-4 border-blue-600 pr-3">جميع الإعلانات النشطة</h3>
+            <span id="itemsCount" class="text-xs font-bold text-slate-500 bg-slate-200 px-3 py-1 rounded-full">0 إعلان</span>
+        </div>
+        <div id="feed" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </main>
+
+    <!-- Post Ad Modal -->
+    <div id="postModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] p-4 overflow-y-auto flex items-center justify-center">
+        <div class="max-w-xl w-full bg-white p-8 rounded-3xl shadow-2xl border border-slate-100">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-black text-slate-800">إضافة إعلان جديد</h3>
+                <button onclick="closePostModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+            </div>
+            <form id="listingForm" class="space-y-4">
+                <input name="title" placeholder="عنوان الإعلان" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl text-slate-800 font-medium outline-none" required>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="number" name="price" placeholder="السعر" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
+                    <select name="currency" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none">
+                        <option>ريال يمني (جديد - عدن)</option>
+                        <option>ريال يمني (قديم - صنعاء)</option>
+                        <option>دولار أمريكي ($)</option>
+                        <option>ريال سعودي</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <input name="location" placeholder="المحافظة (صنعاء، عدن...)" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
+                    <select name="category" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none">
+                        <option value="سيارات">سيارات</option>
+                        <option value="عقارات">عقارات</option>
+                        <option value="إلكترونيات">إلكترونيات</option>
+                        <option value="وظائف">وظائف</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                <textarea name="description" placeholder="تفاصيل السلعة..." class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none h-24"></textarea>
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">صورة السلعة من الهاتف:</label>
+                    <input type="file" name="image" accept="image/*" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm file:bg-blue-600 file:text-white file:border-none file:px-4 file:py-2 file:rounded-lg cursor-pointer" required>
+                </div>
+
+                <!-- Promoted Option & Jeeb Checkout Trigger -->
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="promotedCheckbox" name="isPromoted" value="true" onchange="toggleJeebSection(this.checked)" class="w-5 h-5 accent-amber-600">
+                        <label for="promotedCheckbox" class="text-sm font-black text-amber-900">⭐ جعل هذا الإعلان ممول كبرى (في البانر المتحرك العلوي)</label>
+                    </div>
+                    
+                    <div id="jeebCheckoutSection" class="hidden pt-3 border-t border-amber-200 space-y-3">
+                        <p class="text-xs text-amber-800 font-medium">رسوم التمويل الكبرى: <strong class="text-amber-900">5,000 ريال يمني</strong> أو ما يعادلها.</p>
+                        <div class="bg-white p-3 rounded-xl border border-amber-300">
+                            <p class="text-[11px] text-slate-500 font-bold">حول المبلغ إلى محفظة جيب الرسمية:</p>
+                            <p class="text-2xl font-black text-blue-600 tracking-wider">3308947</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">ارفع صورة إيصال التحويل من محفظة جيب:</label>
+                            <input type="file" name="receipt" accept="image/*" class="w-full bg-white border border-amber-300 p-2.5 rounded-xl text-sm file:bg-amber-600 file:text-white file:border-none file:px-3 file:py-1.5 file:rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full cheerful-gradient text-white font-black py-4 rounded-xl text-lg shadow-lg">نشر الإعلان الآن</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] p-4 flex items-center justify-center">
+        <div class="max-w-md w-full bg-white p-8 rounded-3xl shadow-2xl">
+            <h3 class="text-2xl font-black text-slate-800 mb-2">تسجيل الدخول</h3>
+            <form id="authForm" class="space-y-4 mt-4">
+                <input name="name" placeholder="الاسم الكامل" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
+                <input type="tel" name="phone" placeholder="رقم الهاتف" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg">دخول</button>
+            </form>
+            <button onclick="closeAuthModal()" class="w-full mt-3 text-slate-400 font-bold text-sm py-2">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div id="detailsModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] p-4 flex items-center justify-center">
+        <div class="max-w-lg w-full bg-white p-8 rounded-3xl shadow-2xl overflow-hidden">
+            <div id="modalContent"></div>
+            <button onclick="closeDetailsModal()" class="w-full mt-6 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3 rounded-xl transition">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = JSON.parse(localStorage.getItem('haraj_user') || 'null');
+        updateAuthUI();
+
+        function updateAuthUI() {
+            const btn = document.getElementById('authBtn');
+            if (currentUser) {
+                btn.innerText = '👤 ' + currentUser.name;
+                btn.onclick = () => { if(confirm('تسجيل الخروج؟')) { localStorage.removeItem('haraj_user'); currentUser = null; updateAuthUI(); } };
+            }
+        }
+
+        const openPostModal = () => document.getElementById('postModal').classList.remove('hidden');
+        const closePostModal = () => document.getElementById('postModal').classList.add('hidden');
+        const openAuthModal = () => document.getElementById('authModal').classList.remove('hidden');
+        const closeAuthModal = () => document.getElementById('authModal').classList.add('hidden');
+        const closeDetailsModal = () => document.getElementById('detailsModal').classList.add('hidden');
+
+        function toggleJeebSection(show) {
+            const sec = document.getElementById('jeebCheckoutSection');
+            if(show) sec.classList.remove('hidden');
+            else sec.classList.add('hidden');
+        }
+
+        document.getElementById('authForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const res = await fetch('/api/auth', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name: formData.get('name'), phone: formData.get('phone')}) });
+            const data = await res.json();
+            if(data.success) {
+                currentUser = data.user;
+                localStorage.setItem('haraj_user', JSON.stringify(currentUser));
+                updateAuthUI();
+                closeAuthModal();
+                alert('مرحباً بك ' + currentUser.name);
+            }
+        };
+
+        document.getElementById('listingForm').onsubmit = async (e) => {
+            e.preventDefault();
+            if(!currentUser) { alert('يرجى تسجيل الدخول أولاً'); openAuthModal(); return; }
+            const formData = new FormData(e.target);
+            formData.append('sellerName', currentUser.name);
+            formData.append('sellerPhone', currentUser.phone);
+
+            const res = await fetch('/api/listings', { method: 'POST', body: formData });
+            const data = await res.json();
+            if(data.success) {
+                if(data.listing.status === 'pending_payment') {
+                    alert('تم إرسال إعلانك بنجاح! سيتم مراجعة إيصال التحويل عبر محفظة جيب وتفعيله في البانر المتحرك قريباً.');
+                } else {
+                    alert('تم نشر إعلانك بنجاح!');
+                }
+                closePostModal();
+                loadData();
+            }
+        };
+
+        let allListings = [];
+        let carouselIndex = 0;
+        let carouselTimer = null;
+
+        async function loadData() {
+            const res = await fetch('/api/data');
+            const data = await res.json();
+            allListings = data.listings;
+            renderCarousel();
+            filterListings();
+        }
+
+        function renderCarousel() {
+            const promoted = allListings.filter(l => l.isPromoted && l.status === 'active');
+            const container = document.getElementById('carouselContainer');
+            
+            if(promoted.length === 0) {
+                container.innerHTML = `
+                    <div class="w-full h-full cheerful-gradient flex flex-col items-center justify-center text-white p-6 text-center">
+                        <span class="text-4xl mb-2">⭐</span>
+                        <h2 class="text-2xl font-black mb-1">مساحة الإعلانات الممولة الكبرى فارغة حالياً</h2>
+                        <p class="text-xs text-blue-100">أضف إعلانك واجعله "ممول كبرى" ليظهر هنا للجميع لمدة 10 ثواني وأكثر لكل معلن!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if(carouselIndex >= promoted.length) carouselIndex = 0;
+            const l = promoted[carouselIndex];
+
+            container.innerHTML = `
+                <div class="relative w-full h-full flex items-center justify-between text-white p-8 md:p-12 transition-all duration-700">
+                    <div class="absolute inset-0 bg-cover bg-center filter brightness-50" style="background-image: url('${l.image}')"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                    
+                    <div class="z-10 max-w-lg">
+                        <span class="gold-badge text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">⭐ إعلان ممول كبرى (${carouselIndex + 1} من ${promoted.length})</span>
+                        <h2 class="text-3xl md:text-4xl font-black mb-2 text-white drop-shadow">${l.title}</h2>
+                        <p class="text-amber-400 font-black text-2xl mb-4 drop-shadow">${l.price} ${l.currency}</p>
+                        <button onclick="showDetails(${l.id})" class="bg-white text-slate-900 font-black px-6 py-2.5 rounded-xl shadow-lg hover:bg-amber-300 transition">تفاصيل والشراء</button>
+                    </div>
+                </div>
+            `;
+
+            if(carouselTimer) clearInterval(carouselTimer);
+            carouselTimer = setInterval(() => {
+                carouselIndex++;
+                if(carouselIndex >= promoted.length) carouselIndex = 0;
+                renderCarousel();
+            }, 10000); // Rotate every 10 seconds
+        }
+
+        function filterListings() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+
+            const activeListings = allListings.filter(l => l.status === 'active');
+            const filtered = activeListings.filter(l => {
+                const matchQ = l.title.toLowerCase().includes(query) || l.location.toLowerCase().includes(query);
+                const matchCat = cat ? l.category === cat : true;
+                return matchQ && matchCat;
+            });
+
+            document.getElementById('itemsCount').innerText = filtered.length + ' إعلان';
+            document.getElementById('feed').innerHTML = filtered.map(l => `
+                <div class="card rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between cursor-pointer" onclick="showDetails(${l.id})">
+                    <div class="relative h-48 bg-slate-100">
+                        ${l.isPromoted ? '<span class="absolute top-2 right-2 gold-badge text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow">⭐ ممول</span>' : ''}
+                        <img src="${l.image}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 class="font-black text-slate-800 text-base mb-1 truncate">${l.title}</h4>
+                            <p class="text-blue-600 font-black text-lg mb-2">${l.price} <span class="text-xs font-normal text-slate-500">${l.currency}</span></p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-400">
+                            <span>📍 ${l.location}</span>
+                            <span class="text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">التفاصيل &larr;</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showDetails(id) {
+            const l = allListings.find(x => x.id === id);
+            if(!l) return;
+            document.getElementById('modalContent').innerHTML = `
+                <img src="${l.image}" class="w-full h-56 object-cover rounded-2xl mb-4 shadow">
+                <h3 class="text-2xl font-black text-slate-900 mb-1">${l.title}</h3>
+                <p class="text-blue-600 font-black text-2xl mb-4">${l.price} <span class="text-sm font-normal text-slate-500">${l.currency}</span></p>
+                
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 mb-6">
+                    <p class="text-sm text-slate-700"><strong>التصنيف:</strong> ${l.category}</p>
+                    <p class="text-sm text-slate-700"><strong>المحافظة:</strong> ${l.location}</p>
+                    <p class="text-sm text-slate-700"><strong>اسم البائع:</strong> ${l.sellerName}</p>
+                    <p class="text-sm text-slate-700"><strong>الوصف:</strong> ${l.description}</p>
+                </div>
+
+                <a href="tel:${l.sellerPhone}" class="block w-full text-center cheerful-gradient text-white font-black py-4 rounded-xl shadow-lg text-lg">📞 تواصل مع البائع الآن ( ${l.sellerPhone} )</a>
+            `;
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
