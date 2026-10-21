@@ -1,0 +1,15 @@
+{
+  "short_name": "حراج اليمن",
+  "name": "حراج اليمن Pro",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3082/3082383.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "display": "standalone"
+}
