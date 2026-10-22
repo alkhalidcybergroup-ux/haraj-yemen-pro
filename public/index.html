@@ -1,333 +1,550 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حراج اليمن Pro | السوق التجاري المتكامل</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حراج اليمن Pro - المنصة الدولية</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background: #f8fafc; color: #1e293b; }
-        .cheerful-gradient { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
-        .gold-badge { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .card { background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(37, 99, 235, 0.15); }
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #131b2e;
+            --bg-card-hover: #1c2744;
+            --accent-green: #10b981;
+            --accent-gold: #f59e0b;
+            --accent-blue: #3b82f6;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            background-image: 
+                radial-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 0),
+                radial-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
+
+        /* Header Bar */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .brand-logo i {
+            color: var(--accent-green);
+        }
+
+        .badge-verified {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Offline Banner */
+        .offline-bar {
+            display: none;
+            background: #991b1b;
+            color: #fecaca;
+            text-align: center;
+            padding: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Container & Pages */
+        .page-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Native Banner Sponsor */
+        .sponsor-banner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(16, 185, 129, 0.15));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sponsor-tag {
+            background: var(--accent-gold);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Cards Design */
+        .ad-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .ad-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: var(--bg-card-hover);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-price {
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+
+        .tech-tag {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .btn-call {
+            background: var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: #000;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: #fff;
+            width: 100%;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-blue);
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: var(--text-sub);
+            font-size: 0.75rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+
+        .nav-item.active {
+            color: var(--accent-green);
+        }
     </style>
-  <link rel="manifest" href="/manifest.json">
-<script data-cfasync="false" src="https://afders.org/1/044637ed9127347a30b7a10ced99bcf3"></script>
 </head>
-<body class="pb-24">
-    <!-- Navbar -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 flex justify-between items-center shadow-sm">
-        <div class="flex items-center gap-3">
-            <h1 class="text-2xl font-black text-blue-600">حراج <span class="text-amber-500">اليمن</span></h1>
-            <span class="text-xs bg-blue-100 text-blue-700 font-bold px-2.5 py-1 rounded-full">PRO</span>
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="brand-logo">
+            <i class="fa-solid fa-store"></i>
+            <span>حراج اليمن Pro</span>
+            <i class="fa-solid fa-circle-check badge-verified" title="المنصة الموثوقة"></i>
         </div>
-        <div class="flex items-center gap-3">
-            <button onclick="openAuthModal()" id="authBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2 rounded-xl font-bold text-sm transition">تسجيل الدخول</button>
-            <button onclick="event.stopPropagation(); openPostModal();" class="cheerful-gradient text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/20 hover:opacity-95 transition">+ أضف إعلان</button>
+        <div style="font-size: 0.8rem; color: var(--accent-gold);">الدولي 🌐</div>
+    </header>
+
+    <!-- Offline Notification Banner -->
+    <div id="offlineBanner" class="offline-bar">
+        <i class="fa-solid fa-wifi"></i> أنت نت تتصفح بدون إنترنت - يتم عرض الإعلانات المخزنة
+    </div>
+
+    <!-- Main Container -->
+    <div class="page-container">
+
+        <!-- Page 1: Home -->
+        <section id="pageHome" class="page active">
+            <div class="sponsor-banner">
+                <div>
+                    <span class="sponsor-tag">برعايات متميزة</span>
+                    <h4 style="margin-top: 4px;">خدمات البرمجة والشبكات</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-sub);">خصومات تصل إلى 30% على السكربتات المخصصة</p>
+                </div>
+                <i class="fa-solid fa-laptop-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+            </div>
+            <h3 style="margin-bottom: 12px; font-size: 1rem; color: var(--text-sub);">أحدث الإعلانات العامة</h3>
+            <div id="adsFeed">جاري تحميل الإعلانات...</div>
+        </section>
+
+        <!-- Page 2: Deals -->
+        <section id="pageDeals" class="page">
+            <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-fire" style="color: var(--accent-gold);"></i> العروض والتخفيضات اليومية</h3>
+            <div id="dealsFeed">جاري جلب أفضل العروض...</div>
+        </section>
+
+        <!-- Page 3: Add Ad -->
+        <section id="pageAdd" class="page">
+            <h3 style="margin-bottom: 14px;"><i class="fa-solid fa-plus-circle"></i> نشر إعلان / مشروع جديد</h3>
+            <form id="addForm">
+                <div class="form-group">
+                    <label>عنوان الإعلان أو المشروع</label>
+                    <input type="text" id="title" class="form-control" placeholder="مثال: مشروع شبكة طوفان الأقصى" required>
+                </div>
+                <div class="form-group">
+                    <label>القسم</label>
+                    <select id="category" class="form-control" required>
+                        <option value="المطورين والتقنية">🛠️ هاب المطورين والتقنية</option>
+                        <option value="سوق التجار والمتاجر">🏪 سوق التجار والمتاجر</option>
+                        <option value="إلكترونيات وهواتف">📱 إلكترونيات وهواتف</option>
+                        <option value="سيارات ومركبات">🚗 سيارات ومركبات</option>
+                        <option value="عقارات وخدمات">🏠 عقارات وخدمات</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>السعر (دولار / ريال)</label>
+                    <input type="text" id="price" class="form-control" placeholder="مثال: $1500" required>
+                </div>
+                <div class="form-group">
+                    <label>رقم الواتساب / الهاتف</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="9677xxxxxxxx" required>
+                </div>
+                <div class="form-group">
+                    <label>التفاصيل والتقنيات المستخدمة</label>
+                    <textarea id="details" class="form-control" rows="4" placeholder="اكتب التفاصيل والميزات..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> نشر فوراً</button>
+            </form>
+        </section>
+
+        <!-- Page 4: Tech Hub -->
+        <section id="pageTech" class="page">
+            <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.3); margin-bottom: 14px;">
+                <h4><i class="fa-solid fa-code"></i> هاب المطورين والبرمجة</h4>
+                <p style="font-size: 0.8rem; color: var(--text-sub);">معرض مشاريع البرمجة، سكربتات MikroTik، وحلول الويب والشبكات.</p>
+            </div>
+            <div id="techFeed">جاري تحميل مشاريع المطورين...</div>
+        </section>
+
+        <!-- Page 5: Stores & Profile -->
+        <section id="pageProfile" class="page">
+            <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-store"></i> المتاجر الموثقة والشركات</h3>
+            <div class="ad-card" style="text-align: center; padding: 20px;">
+                <i class="fa-solid fa-user-shield" style="font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 10px;"></i>
+                <h4>حساب تاجر / مطور موثق</h4>
+                <p style="font-size: 0.85rem; color: var(--text-sub); margin: 8px 0 14px 0;">قم بتوثيق حسابك للحصول على العلامة الزرقاء وزيادة مبيعاتك.</p>
+                <button class="btn btn-primary" onclick="alert('سيتم فتح طلب التوثيق قريباً!')">طلب توثيق متجر</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchPage('pageHome', this)">
+            <i class="fa-solid fa-house"></i>
+            <span>الرئيسية</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('pageDeals', this)">
+            <i class="fa-solid fa-tags"></i>
+            <span>العروض</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('pageAdd', this)">
+            <i class="fa-solid fa-circle-plus" style="font-size: 1.5rem; color: var(--accent-green);"></i>
+            <span>أضف</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('pageTech', this)">
+            <i class="fa-solid fa-code"></i>
+            <span>المطورين</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('pageProfile', this)">
+            <i class="fa-solid fa-store"></i>
+            <span>المتاجر</span>
         </div>
     </nav>
 
-    <!-- Rotating Carousel for Promoted Ads (10 seconds interval) -->
-    <section class="max-w-7xl mx-auto px-6 pt-6">
-        <div class="w-full h-72 md:h-96 rounded-3xl overflow-hidden shadow-2xl relative bg-slate-950" id="carouselContainer">
-            <!-- Carousel items injected dynamically -->
-        </div>
-    </section>
-
-    <!-- Search & Filter Bar -->
-    <section class="max-w-7xl mx-auto px-6 pt-8">
-        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-4">
-            <input type="text" id="searchInput" oninput="filterListings()" placeholder="ابحث عن سيارة، عقار، جهاز..." class="flex-1 bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-slate-800 font-medium outline-none focus:border-blue-600">
-            <select id="categoryFilter" onchange="filterListings()" class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-slate-800 font-medium outline-none">
-                <option value="">جميع التصنيفات</option>
-                <option value="سيارات">سيارات</option>
-                <option value="عقارات">عقارات</option>
-                <option value="إلكترونيات">إلكترونيات</option>
-                <option value="وظائف">وظائف</option>
-                <option value="أخرى">أخرى</option>
-            </select>
-        </div>
-    </section>
-
-    <!-- Listings Section -->
-    <main class="max-w-7xl mx-auto px-6 pt-8">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-black text-slate-800 border-r-4 border-blue-600 pr-3">جميع الإعلانات النشطة</h3>
-            <span id="itemsCount" class="text-xs font-bold text-slate-500 bg-slate-200 px-3 py-1 rounded-full">0 إعلان</span>
-        </div>
-        <div id="feed" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-    </main>
-
-    <!-- Post Ad Modal -->
-    <div id="postModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] p-4 overflow-y-auto flex items-center justify-center">
-        <div class="max-w-xl w-full bg-white p-8 rounded-3xl shadow-2xl border border-slate-100">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-black text-slate-800">إضافة إعلان جديد</h3>
-                <button onclick="closePostModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
-            </div>
-            <form id="listingForm" class="space-y-4">
-                <input name="title" placeholder="عنوان الإعلان" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl text-slate-800 font-medium outline-none" required>
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="number" name="price" placeholder="السعر" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
-                    <select name="currency" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none">
-                        <option>ريال يمني (جديد - عدن)</option>
-                        <option>ريال يمني (قديم - صنعاء)</option>
-                        <option>دولار أمريكي ($)</option>
-                        <option>ريال سعودي</option>
-                    </select>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <input name="location" placeholder="المحافظة (صنعاء، عدن...)" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
-                    <select name="category" class="bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none">
-                        <option value="سيارات">سيارات</option>
-                        <option value="عقارات">عقارات</option>
-                        <option value="إلكترونيات">إلكترونيات</option>
-                        <option value="وظائف">وظائف</option>
-                        <option value="أخرى">أخرى</option>
-                    </select>
-                </div>
-                <textarea name="description" placeholder="تفاصيل السلعة..." class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none h-24"></textarea>
-                
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 mb-2">صورة السلعة من الهاتف:</label>
-                    <input type="file" name="image" accept="image/*" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm file:bg-blue-600 file:text-white file:border-none file:px-4 file:py-2 file:rounded-lg cursor-pointer" required>
-                </div>
-
-                <!-- Promoted Option & Jeeb Checkout Trigger -->
-                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 space-y-3">
-                    <div class="flex items-center gap-3">
-                        <input type="checkbox" id="promotedCheckbox" name="isPromoted" value="true" onchange="toggleJeebSection(this.checked)" class="w-5 h-5 accent-amber-600">
-                        <label for="promotedCheckbox" class="text-sm font-black text-amber-900">⭐ جعل هذا الإعلان ممول كبرى (في البانر المتحرك العلوي)</label>
-                    </div>
-                    
-                    <div id="jeebCheckoutSection" class="hidden pt-3 border-t border-amber-200 space-y-3">
-                        <p class="text-xs text-amber-800 font-medium">رسوم التمويل الكبرى: <strong class="text-amber-900">5,000 ريال يمني</strong> أو ما يعادلها.</p>
-                        <div class="bg-white p-3 rounded-xl border border-amber-300">
-                            <p class="text-[11px] text-slate-500 font-bold">حول المبلغ إلى محفظة جيب الرسمية:</p>
-                            <p class="text-2xl font-black text-blue-600 tracking-wider">3308947</p>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">ارفع صورة إيصال التحويل من محفظة جيب:</label>
-                            <input type="file" name="receipt" accept="image/*" class="w-full bg-white border border-amber-300 p-2.5 rounded-xl text-sm file:bg-amber-600 file:text-white file:border-none file:px-3 file:py-1.5 file:rounded-lg cursor-pointer">
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full cheerful-gradient text-white font-black py-4 rounded-xl text-lg shadow-lg">نشر الإعلان الآن</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Auth Modal -->
-    <div id="authModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] p-4 flex items-center justify-center">
-        <div class="max-w-md w-full bg-white p-8 rounded-3xl shadow-2xl">
-            <h3 class="text-2xl font-black text-slate-800 mb-2">تسجيل الدخول</h3>
-            <form id="authForm" class="space-y-4 mt-4">
-                <input name="name" placeholder="الاسم الكامل" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
-                <input type="tel" name="phone" placeholder="رقم الهاتف" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl font-medium outline-none" required>
-                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg">دخول</button>
-            </form>
-            <button onclick="closeAuthModal()" class="w-full mt-3 text-slate-400 font-bold text-sm py-2">إلغاء</button>
-        </div>
-    </div>
-
-    <!-- Details Modal -->
-    <div id="detailsModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] p-4 flex items-center justify-center">
-        <div class="max-w-lg w-full bg-white p-8 rounded-3xl shadow-2xl overflow-hidden">
-            <div id="modalContent"></div>
-            <button onclick="closeDetailsModal()" class="w-full mt-6 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3 rounded-xl transition">إغلاق</button>
-        </div>
-    </div>
-
     <script>
-        let currentUser = JSON.parse(localStorage.getItem('haraj_user') || 'null');
-        updateAuthUI();
+        let allAdsCache = [];
 
-        function updateAuthUI() {
-            const btn = document.getElementById('authBtn');
-            if (currentUser) {
-                btn.innerText = '👤 ' + currentUser.name;
-                btn.onclick = () => { if(confirm('تسجيل الخروج؟')) { localStorage.removeItem('haraj_user'); currentUser = null; updateAuthUI(); } };
-            }
-        }
-
-        const openPostModal = () => document.getElementById('postModal').classList.remove('hidden');
-        const closePostModal = () => document.getElementById('postModal').classList.add('hidden');
-        const openAuthModal = () => document.getElementById('authModal').classList.remove('hidden');
-        const closeAuthModal = () => document.getElementById('authModal').classList.add('hidden');
-        const closeDetailsModal = () => document.getElementById('detailsModal').classList.add('hidden');
-
-        function toggleJeebSection(show) {
-            const sec = document.getElementById('jeebCheckoutSection');
-            if(show) sec.classList.remove('hidden');
-            else sec.classList.add('hidden');
-        }
-
-        document.getElementById('authForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const res = await fetch('/api/auth', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name: formData.get('name'), phone: formData.get('phone')}) });
-            const data = await res.json();
-            if(data.success) {
-                currentUser = data.user;
-                localStorage.setItem('haraj_user', JSON.stringify(currentUser));
-                updateAuthUI();
-                closeAuthModal();
-                alert('مرحباً بك ' + currentUser.name);
-            }
-        };
-
-        document.getElementById('listingForm').onsubmit = async (e) => {
-            e.preventDefault();
-            if(!currentUser) { alert('يرجى تسجيل الدخول أولاً'); openAuthModal(); return; }
-            const formData = new FormData(e.target);
-            formData.append('sellerName', currentUser.name);
-            formData.append('sellerPhone', currentUser.phone);
-
-            const res = await fetch('/api/listings', { method: 'POST', body: formData });
-            const data = await res.json();
-            if(data.success) {
-                if(data.listing.status === 'pending_payment') {
-                    alert('تم إرسال إعلانك بنجاح! سيتم مراجعة إيصال التحويل عبر محفظة جيب وتفعيله في البانر المتحرك قريباً.');
-                } else {
-                    showToast('تم نشر إعلانك بنجاح! 🎉');
-                }
-                closePostModal();
-                document.addEventListener("DOMContentLoaded", () => { loadData(); });
-            }
-        };
-
-        let allListings = [];
-        let carouselIndex = 0;
-        let carouselTimer = null;
-
-        
-        function showToast(message) {
-            let toast = document.getElementById("toastNotification");
-            if(!toast) {
-                toast = document.createElement("div");
-                toast.id = "toastNotification";
-                toast.className = "fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl z-50 text-sm font-bold transition-all duration-300 opacity-0 pointer-events-none";
-                document.body.appendChild(toast);
-            }
-            toast.textContent = message;
-            toast.classList.remove("opacity-0", "pointer-events-none");
-            setTimeout(() => {
-                toast.classList.add("opacity-0", "pointer-events-none");
-            }, 3000);
-        }
-
-        async function loadData() {
-            const res = await fetch('/api/data');
-            const data = await res.json();
-            allListings = data.listings;
-            renderCarousel();
-            filterListings();
-        }
-
-        function renderCarousel() {
-            const promoted = allListings.filter(l => l.isPromoted && l.status === 'active');
-            const container = document.getElementById('carouselContainer');
+        // Page Navigation Logic
+        function switchPage(pageId, element) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             
-            if(promoted.length === 0) {
-                container.innerHTML = `
-                    <div class="w-full h-full cheerful-gradient flex flex-col items-center justify-center text-white p-6 text-center">
-                        <span class="text-4xl mb-2">⭐</span>
-                        <h2 class="text-2xl font-black mb-1">مساحة الإعلانات الممولة الكبرى فارغة حالياً</h2>
-                        <p class="text-xs text-blue-100">أضف إعلانك واجعله "ممول كبرى" ليظهر هنا للجميع لمدة 10 ثواني وأكثر لكل معلن!</p>
-                    </div>
-                `;
+            document.getElementById(pageId).classList.add('active');
+            if(element) element.classList.add('active');
+
+            if(pageId === 'pageTech') filterTechAds();
+            if(pageId === 'pageDeals') filterDealsAds();
+        }
+
+        // Fetch Ads with Offline Support
+        async function fetchAds() {
+            try {
+                const response = await fetch('/api/ads');
+                const ads = await response.json();
+                allAdsCache = ads;
+                localStorage.setItem('haraj_ads_cache', JSON.stringify(ads));
+                renderAds(ads);
+            } catch (err) {
+                console.log('Offline mode active, loading cached ads...');
+                const cached = localStorage.getItem('haraj_ads_cache');
+                if(cached) {
+                    allAdsCache = JSON.parse(cached);
+                    renderAds(allAdsCache);
+                }
+            }
+        }
+
+        function renderAds(ads) {
+            const feed = document.getElementById('adsFeed');
+            if(!ads || ads.length === 0) {
+                feed.innerHTML = '<p style="text-align:center; color: var(--text-sub);">لا توجد إعلانات حالياً.</p>';
                 return;
             }
 
-            if(carouselIndex >= promoted.length) carouselIndex = 0;
-            const l = promoted[carouselIndex];
-
-            container.innerHTML = `
-                <div class="relative w-full h-full flex items-center justify-between text-white p-8 md:p-12 transition-all duration-700">
-                    <div class="absolute inset-0 bg-cover bg-center filter brightness-50" style="background-image: url('${l.image}')"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-                    
-                    <div class="z-10 max-w-lg">
-                        <span class="gold-badge text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">⭐ إعلان ممول كبرى (${carouselIndex + 1} من ${promoted.length})</span>
-                        <h2 class="text-3xl md:text-4xl font-black mb-2 text-white drop-shadow">${l.title}</h2>
-                        <p class="text-amber-400 font-black text-2xl mb-4 drop-shadow">${l.price} ${l.currency}</p>
-                        <button onclick="showDetails(${l.id})" class="bg-white text-slate-900 font-black px-6 py-2.5 rounded-xl shadow-lg hover:bg-amber-300 transition">تفاصيل والشراء</button>
+            feed.innerHTML = ads.map(ad => `
+                <div class="ad-card">
+                    <div class="card-header">
+                        <span class="card-title">${escapeHtml(ad.title)}</span>
+                        <span class="card-price">${escapeHtml(ad.price)}</span>
                     </div>
-                </div>
-            `;
-
-            if(carouselTimer) clearInterval(carouselTimer);
-            carouselTimer = setInterval(() => {
-                carouselIndex++;
-                if(carouselIndex >= promoted.length) carouselIndex = 0;
-                renderCarousel();
-            }, 10000); // Rotate every 10 seconds
-        }
-
-        function filterListings() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const cat = document.getElementById('categoryFilter').value;
-
-            const activeListings = allListings.filter(l => l.status === 'active');
-            const filtered = activeListings.filter(l => {
-                const matchQ = l.title.toLowerCase().includes(query) || l.location.toLowerCase().includes(query);
-                const matchCat = cat ? l.category === cat : true;
-                return matchQ && matchCat;
-            });
-
-            document.getElementById('itemsCount').innerText = filtered.length + ' إعلان';
-            document.getElementById('feed').innerHTML = filtered.map(l => `
-                <div class="card rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between cursor-pointer" onclick="showDetails(${l.id})">
-                    <div class="relative h-48 bg-slate-100">
-                        ${l.isPromoted ? '<span class="absolute top-2 right-2 gold-badge text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow">⭐ ممول</span>' : ''}
-                        <img src="${l.image}" class="w-full h-full object-cover">
+                    <div class="card-meta">
+                        <span><i class="fa-solid fa-folder"></i> ${escapeHtml(ad.category || 'عام')}</span>
+                        <span><i class="fa-solid fa-clock"></i> ${new Date(ad.createdAt).toLocaleDateString('ar-YE')}</span>
                     </div>
-                    <div class="p-4 flex flex-col flex-1 justify-between">
-                        <div>
-                            <h4 class="font-black text-slate-800 text-base mb-1 truncate">${l.title}</h4>
-                            <p class="text-blue-600 font-black text-lg mb-2">${l.price} <span class="text-xs font-normal text-slate-500">${l.currency}</span></p>
-                        </div>
-                        <div class="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-400">
-                            <span>📍 ${l.location}</span>
-                            <span class="text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">التفاصيل &larr;</span>
-                        </div>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">${escapeHtml(ad.details)}</p>
+                    <div class="card-actions">
+                        <a href="tel:${escapeHtml(ad.phone)}" class="btn btn-call"><i class="fa-solid fa-phone"></i> اتصال</a>
+                        <a href="https://wa.me/${escapeHtml(ad.phone)}?text=${encodeURIComponent('أهلاً، أنا مهتم بخصوص إعلانك: ' + ad.title)}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
                     </div>
                 </div>
             `).join('');
         }
 
-        function showDetails(id) {
-            const l = allListings.find(x => x.id === id);
-            if(!l) return;
-            document.getElementById('modalContent').innerHTML = `
-                <img src="${l.image}" class="w-full h-56 object-cover rounded-2xl mb-4 shadow">
-                <h3 class="text-2xl font-black text-slate-900 mb-1">${l.title}</h3>
-                <p class="text-blue-600 font-black text-2xl mb-4">${l.price} <span class="text-sm font-normal text-slate-500">${l.currency}</span></p>
-                
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 mb-6">
-                    <p class="text-sm text-slate-700"><strong>التصنيف:</strong> ${l.category}</p>
-                    <p class="text-sm text-slate-700"><strong>المحافظة:</strong> ${l.location}</p>
-                    <p class="text-sm text-slate-700"><strong>اسم البائع:</strong> ${l.sellerName}</p>
-                    <p class="text-sm text-slate-700"><strong>الوصف:</strong> ${l.description}</p>
+        function filterTechAds() {
+            const techAds = allAdsCache.filter(ad => ad.category === 'المطورين والتقنية');
+            const feed = document.getElementById('techFeed');
+            if(techAds.length === 0) {
+                feed.innerHTML = '<p style="text-align:center; color: var(--text-sub); padding: 20px;">لا توجد مشاريع مضافة في قسم المطورين حتى الآن.</p>';
+            } else {
+                feed.innerHTML = techAds.map(ad => `
+                    <div class="ad-card" style="border-right: 4px solid var(--accent-blue);">
+                        <div class="card-header">
+                            <span class="card-title">${escapeHtml(ad.title)}</span>
+                            <span class="card-price">${escapeHtml(ad.price)}</span>
+                        </div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">برمجة ومشاريع</span>
+                            <span class="tech-tag">مطور موثق <i class="fa-solid fa-check-circle"></i></span>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">${escapeHtml(ad.details)}</p>
+                        <div class="card-actions">
+                            <a href="https://wa.me/${escapeHtml(ad.phone)}?text=${encodeURIComponent('أهلاً، أرغب بالاستفسار عن مشروع المطور: ' + ad.title)}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل مع المطور</a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function filterDealsAds() {
+            const feed = document.getElementById('dealsFeed');
+            feed.innerHTML = allAdsCache.map(ad => `
+                <div class="ad-card" style="border-right: 4px solid var(--accent-gold);">
+                    <div class="card-header">
+                        <span class="card-title">${escapeHtml(ad.title)}</span>
+                        <span class="card-price" style="color: var(--accent-gold);">${escapeHtml(ad.price)}</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-sub);">${escapeHtml(ad.details)}</p>
+                    <div class="card-actions" style="margin-top: 8px;">
+                        <a href="https://wa.me/${escapeHtml(ad.phone)}" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> حجز العرض</a>
+                    </div>
                 </div>
-
-                <a href="tel:${l.sellerPhone}" class="block w-full text-center cheerful-gradient text-white font-black py-4 rounded-xl shadow-lg text-lg">📞 تواصل مع البائع الآن ( ${l.sellerPhone} )</a>
-            `;
-            document.getElementById('detailsModal').classList.remove('hidden');
+            `).join('');
         }
 
-        loadData();
-    </script>
+        // Add Ad Form Submit
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newAd = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                price: document.getElementById('price').value,
+                phone: document.getElementById('phone').value,
+                details: document.getElementById('details').value
+            };
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(() => console.log('Service Worker Registered'));
+            try {
+                const res = await fetch('/api/ads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newAd)
+                });
+                if(res.ok) {
+                    alert('✅ تم نشر الإعلان بنجاح!');
+                    document.getElementById('addForm').reset();
+                    fetchAds();
+                    switchPage('pageHome', document.querySelectorAll('.nav-item')[0]);
+                }
+            } catch(err) {
+                alert('❌ حدث خطأ أثناء النشر.');
+            }
+        });
+
+        // Network Status Detect
+        window.addEventListener('online', () => {
+            document.getElementById('offlineBanner').style.display = 'none';
+            fetchAds();
+        });
+        window.addEventListener('offline', () => {
+            document.getElementById('offlineBanner').style.display = 'block';
+        });
+
+        function escapeHtml(str) {
+            return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
         }
+
+        // Initial Load
+        fetchAds();
     </script>
 </body>
-
 </html>
