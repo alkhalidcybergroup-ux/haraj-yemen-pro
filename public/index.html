@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حراج اليمن Pro - المنصة الدولية</title>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0f172a">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,92 +17,48 @@
             --text-sub: #94a3b8;
             --border-color: #1e293b;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            background-image: 
-                radial-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 0),
-                radial-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 0);
+            background-image: radial-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 0);
             background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
             min-height: 100vh;
         }
-
-        /* Header Bar */
         .app-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(15, 23, 42, 0.9);
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 14px 16px;
+            display: flex; align-items: center; justify-content: space-between;
         }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-main);
+        .brand-logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: bold; color: var(--text-main); }
+        .brand-logo i { color: var(--accent-green); }
+        .page-container { max-width: 600px; margin: 0 auto; padding: 16px; }
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        .developer-card {
+            background: linear-gradient(135deg, #131b2e 0%, #1e293b 100%);
+            border: 1px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
         }
-
-        .brand-logo i {
-            color: var(--accent-green);
-        }
-
-        .badge-verified {
+        .dev-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
             color: var(--accent-blue);
-            font-size: 0.9rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
 
-        /* Offline Banner */
-        .offline-bar {
-            display: none;
-            background: #991b1b;
-            color: #fecaca;
-            text-align: center;
-            padding: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Container & Pages */
-        .page-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Native Banner Sponsor */
         .sponsor-banner {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(16, 185, 129, 0.15));
             border: 1px solid rgba(245, 158, 11, 0.3);
@@ -115,7 +69,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .sponsor-tag {
             background: var(--accent-gold);
             color: #000;
@@ -124,185 +77,48 @@
             padding: 2px 8px;
             border-radius: 4px;
         }
-
-        /* Cards Design */
         .ad-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 14px;
             margin-bottom: 14px;
-            transition: all 0.2s ease;
         }
-
-        .ad-card:hover {
-            border-color: rgba(59, 130, 246, 0.4);
-            background: var(--bg-card-hover);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .card-price {
-            color: var(--accent-green);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .card-meta {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            margin-bottom: 10px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .tech-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin: 8px 0;
-        }
-
-        .tech-tag {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent-blue);
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .card-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            text-decoration: none;
-        }
-
-        .btn-call {
-            background: var(--border-color);
-            color: var(--text-main);
-        }
-
-        .btn-whatsapp {
-            background: #25d366;
-            color: #000;
-        }
-
-        .btn-primary {
-            background: var(--accent-blue);
-            color: #fff;
-            width: 100%;
-        }
-
-        /* Form Controls */
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: var(--text-sub);
-            font-size: 0.85rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-main);
-            outline: none;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent-blue);
-        }
-
-        /* Bottom Navigation Bar */
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+        .card-price { color: var(--accent-green); font-weight: bold; font-size: 1.1rem; }
+        .card-actions { display: flex; gap: 8px; margin-top: 12px; }
+        .btn { flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; font-size: 0.9rem; }
+        .btn-call { background: var(--border-color); color: var(--text-main); }
+        .btn-whatsapp { background: #25d366; color: #000; }
+        .btn-primary { background: var(--accent-blue); color: #fff; width: 100%; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; margin-bottom: 6px; color: var(--text-sub); font-size: 0.85rem; }
+        .form-control { width: 100%; padding: 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); outline: none; }
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(16px);
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(15, 23, 42, 0.98);
             border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            z-index: 1000;
+            display: flex; justify-content: space-around;
+            padding: 10px 0; z-index: 1000;
         }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            color: var(--text-sub);
-            font-size: 0.75rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nav-item i {
-            font-size: 1.2rem;
-        }
-
-        .nav-item.active {
-            color: var(--accent-green);
-        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-sub); font-size: 0.75rem; cursor: pointer; }
+        .nav-item i { font-size: 1.2rem; }
+        .nav-item.active { color: var(--accent-green); }
     </style>
 </head>
 <body>
-
-    <!-- Header -->
     <header class="app-header">
         <div class="brand-logo">
             <i class="fa-solid fa-store"></i>
             <span>حراج اليمن Pro</span>
-            <i class="fa-solid fa-circle-check badge-verified" title="المنصة الموثوقة"></i>
+            <i class="fa-solid fa-circle-check" style="color: var(--accent-blue); font-size: 0.9rem;" title="موثق"></i>
         </div>
         <div style="font-size: 0.8rem; color: var(--accent-gold);">الدولي 🌐</div>
     </header>
 
-    <!-- Offline Notification Banner -->
-    <div id="offlineBanner" class="offline-bar">
-        <i class="fa-solid fa-wifi"></i> أنت نت تتصفح بدون إنترنت - يتم عرض الإعلانات المخزنة
-    </div>
-
-    <!-- Main Container -->
     <div class="page-container">
-
-        <!-- Page 1: Home -->
+        <!-- الصفحة الرئيسية -->
         <section id="pageHome" class="page active">
             <div class="sponsor-banner">
                 <div>
@@ -316,19 +132,19 @@
             <div id="adsFeed">جاري تحميل الإعلانات...</div>
         </section>
 
-        <!-- Page 2: Deals -->
+        <!-- صفحة العروض -->
         <section id="pageDeals" class="page">
             <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-fire" style="color: var(--accent-gold);"></i> العروض والتخفيضات اليومية</h3>
             <div id="dealsFeed">جاري جلب أفضل العروض...</div>
         </section>
 
-        <!-- Page 3: Add Ad -->
+        <!-- صفحة إضافة إعلان -->
         <section id="pageAdd" class="page">
             <h3 style="margin-bottom: 14px;"><i class="fa-solid fa-plus-circle"></i> نشر إعلان / مشروع جديد</h3>
             <form id="addForm">
                 <div class="form-group">
                     <label>عنوان الإعلان أو المشروع</label>
-                    <input type="text" id="title" class="form-control" placeholder="مثال: مشروع شبكة طوفان الأقصى" required>
+                    <input type="text" id="title" class="form-control" placeholder="مثال: جهاز آيفون / سكربت مخصص" required>
                 </div>
                 <div class="form-group">
                     <label>القسم</label>
@@ -337,48 +153,59 @@
                         <option value="سوق التجار والمتاجر">🏪 سوق التجار والمتاجر</option>
                         <option value="إلكترونيات وهواتف">📱 إلكترونيات وهواتف</option>
                         <option value="سيارات ومركبات">🚗 سيارات ومركبات</option>
-                        <option value="عقارات وخدمات">🏠 عقارات وخدمات</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>السعر (دولار / ريال)</label>
-                    <input type="text" id="price" class="form-control" placeholder="مثال: $1500" required>
+                    <label>السعر</label>
+                    <input type="text" id="price" class="form-control" placeholder="$100" required>
                 </div>
                 <div class="form-group">
                     <label>رقم الواتساب / الهاتف</label>
                     <input type="tel" id="phone" class="form-control" placeholder="9677xxxxxxxx" required>
                 </div>
                 <div class="form-group">
-                    <label>التفاصيل والتقنيات المستخدمة</label>
-                    <textarea id="details" class="form-control" rows="4" placeholder="اكتب التفاصيل والميزات..." required></textarea>
+                    <label>التفاصيل والتقنيات</label>
+                    <textarea id="details" class="form-control" rows="3" placeholder="اكتب تفاصيل الإعلان..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> نشر فوراً</button>
             </form>
         </section>
 
-        <!-- Page 4: Tech Hub -->
+        <!-- صفحة المطورين -->
         <section id="pageTech" class="page">
-            <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.3); margin-bottom: 14px;">
-                <h4><i class="fa-solid fa-code"></i> هاب المطورين والبرمجة</h4>
-                <p style="font-size: 0.8rem; color: var(--text-sub);">معرض مشاريع البرمجة، سكربتات MikroTik، وحلول الويب والشبكات.</p>
+            <!-- كارت المطور الرئيسي (زيد الحمزي) -->
+            <div class="developer-card">
+                <span class="dev-badge"><i class="fa-solid fa-code"></i> المطور والمهندس المعتمد</span>
+                <h3 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 4px;">المهندس: زيد الحمزي</h3>
+                <p style="font-size: 0.85rem; color: var(--accent-green); margin-bottom: 10px; font-weight: bold;">تصميم وتطوير المنصات والأنظمة البرمجية 🚀</p>
+                
+                <p style="font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; margin-bottom: 14px;">
+                    نقدم خدمات تصميم وتطوير تطبيقات الويب، أنظمة المبيعات POS، سكربتات شبكات MikroTik المخصصة، وتصميم حلول برمجية متكاملة للشركات والأفراد برؤية دولية حديثة.
+                </p>
+
+                <div class="card-actions">
+                    <a href="tel:00967730231001" class="btn btn-call"><i class="fa-solid fa-phone"></i> اتصل الآن</a>
+                    <a href="https://wa.me/967730231001?text=مرحباً%20مهندس%20زيد،%20أرغب%20بطلب%20خدمة%20برمجية/تطبيق" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> طلب مشروع خاص</a>
+                </div>
             </div>
+
+            <h4 style="margin-bottom: 10px; color: var(--text-sub); font-size: 0.95rem;">مشاريع وسكربتات المطورين</h4>
             <div id="techFeed">جاري تحميل مشاريع المطورين...</div>
         </section>
 
-        <!-- Page 5: Stores & Profile -->
+        <!-- صفحة المتاجر -->
         <section id="pageProfile" class="page">
             <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-store"></i> المتاجر الموثقة والشركات</h3>
             <div class="ad-card" style="text-align: center; padding: 20px;">
-                <i class="fa-solid fa-user-shield" style="font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 10px;"></i>
+                <i class="fa-solid fa-user-shield" style="font-size: 2.2rem; color: var(--accent-blue); margin-bottom: 10px;"></i>
                 <h4>حساب تاجر / مطور موثق</h4>
-                <p style="font-size: 0.85rem; color: var(--text-sub); margin: 8px 0 14px 0;">قم بتوثيق حسابك للحصول على العلامة الزرقاء وزيادة مبيعاتك.</p>
-                <button class="btn btn-primary" onclick="alert('سيتم فتح طلب التوثيق قريباً!')">طلب توثيق متجر</button>
+                <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 12px;">قم بتوثيق حسابك للحصول على العلامة الزرقاء وزيادة مبيعاتك.</p>
+                <button class="btn btn-primary" onclick="alert('طلب التوثيق قيد التفعيل!')">طلب توثيق متجر</button>
             </div>
         </section>
-
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- شريط التنقل السفلي -->
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchPage('pageHome', this)">
             <i class="fa-solid fa-house"></i>
@@ -403,147 +230,122 @@
     </nav>
 
     <script>
-        let allAdsCache = [];
+        let allAds = [];
 
-        // Page Navigation Logic
-        function switchPage(pageId, element) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            
+        function switchPage(pageId, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            if(element) element.classList.add('active');
-
-            if(pageId === 'pageTech') filterTechAds();
-            if(pageId === 'pageDeals') filterDealsAds();
+            if(el) el.classList.add('active');
+            if(pageId === 'pageTech') filterTech();
+            if(pageId === 'pageDeals') filterDeals();
         }
 
-        // Fetch Ads with Offline Support
         async function fetchAds() {
             try {
-                const response = await fetch('/api/ads');
-                const ads = await response.json();
-                allAdsCache = ads;
-                localStorage.setItem('haraj_ads_cache', JSON.stringify(ads));
-                renderAds(ads);
-            } catch (err) {
-                console.log('Offline mode active, loading cached ads...');
-                const cached = localStorage.getItem('haraj_ads_cache');
-                if(cached) {
-                    allAdsCache = JSON.parse(cached);
-                    renderAds(allAdsCache);
-                }
+                const res = await fetch('/api/ads');
+                if(!res.ok) throw new Error('Network error');
+                allAds = await res.json();
+                renderHome(allAds);
+            } catch(e) {
+                console.log('Error fetching ads:', e);
+                document.getElementById('adsFeed').innerHTML = '<div style="text-align:center; padding: 20px; color: var(--text-sub);"><p>لا توجد إعلانات مضافة بعد.</p><p style="font-size:0.8rem; margin-top:6px;">قم بإضافة أول إعلان من تبويب "أضف"!</p></div>';
             }
         }
 
-        function renderAds(ads) {
+        function renderHome(ads) {
             const feed = document.getElementById('adsFeed');
-            if(!ads || ads.length === 0) {
-                feed.innerHTML = '<p style="text-align:center; color: var(--text-sub);">لا توجد إعلانات حالياً.</p>';
+            if(!Array.isArray(ads) || ads.length === 0) {
+                feed.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--text-sub);"><p>لا توجد إعلانات حالياً.</p><p style="font-size:0.8rem; margin-top:6px;">انقر على "أضف" لنشر أول إعلان!</p></div>';
                 return;
             }
-
             feed.innerHTML = ads.map(ad => `
                 <div class="ad-card">
                     <div class="card-header">
                         <span class="card-title">${escapeHtml(ad.title)}</span>
                         <span class="card-price">${escapeHtml(ad.price)}</span>
                     </div>
-                    <div class="card-meta">
-                        <span><i class="fa-solid fa-folder"></i> ${escapeHtml(ad.category || 'عام')}</span>
-                        <span><i class="fa-solid fa-clock"></i> ${new Date(ad.createdAt).toLocaleDateString('ar-YE')}</span>
-                    </div>
+                    <p style="font-size: 0.82rem; color: var(--accent-blue); margin-bottom: 6px;"><i class="fa-solid fa-folder"></i> ${escapeHtml(ad.category || 'عام')}</p>
                     <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">${escapeHtml(ad.details)}</p>
                     <div class="card-actions">
                         <a href="tel:${escapeHtml(ad.phone)}" class="btn btn-call"><i class="fa-solid fa-phone"></i> اتصال</a>
-                        <a href="https://wa.me/${escapeHtml(ad.phone)}?text=${encodeURIComponent('أهلاً، أنا مهتم بخصوص إعلانك: ' + ad.title)}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
+                        <a href="https://wa.me/${escapeHtml(ad.phone)}?text=${encodeURIComponent('أهلاً، أنا مهتم بخصوص: ' + ad.title)}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
                     </div>
                 </div>
             `).join('');
         }
 
-        function filterTechAds() {
-            const techAds = allAdsCache.filter(ad => ad.category === 'المطورين والتقنية');
+        function filterTech() {
             const feed = document.getElementById('techFeed');
-            if(techAds.length === 0) {
-                feed.innerHTML = '<p style="text-align:center; color: var(--text-sub); padding: 20px;">لا توجد مشاريع مضافة في قسم المطورين حتى الآن.</p>';
-            } else {
-                feed.innerHTML = techAds.map(ad => `
-                    <div class="ad-card" style="border-right: 4px solid var(--accent-blue);">
-                        <div class="card-header">
-                            <span class="card-title">${escapeHtml(ad.title)}</span>
-                            <span class="card-price">${escapeHtml(ad.price)}</span>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">برمجة ومشاريع</span>
-                            <span class="tech-tag">مطور موثق <i class="fa-solid fa-check-circle"></i></span>
-                        </div>
-                        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">${escapeHtml(ad.details)}</p>
-                        <div class="card-actions">
-                            <a href="https://wa.me/${escapeHtml(ad.phone)}?text=${encodeURIComponent('أهلاً، أرغب بالاستفسار عن مشروع المطور: ' + ad.title)}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل مع المطور</a>
-                        </div>
-                    </div>
-                `).join('');
+            const techAds = allAds.filter(a => a.category === 'المطورين والتقنية');
+            if(!techAds.length) {
+                feed.innerHTML = '<div style="text-align:center; padding: 15px; color: var(--text-sub);"><p>لا توجد مشاريع إضافية حالياً.</p></div>';
+                return;
             }
+            feed.innerHTML = techAds.map(ad => `
+                <div class="ad-card" style="border-right: 4px solid var(--accent-blue);">
+                    <div class="card-header">
+                        <span class="card-title">${escapeHtml(ad.title)}</span>
+                        <span class="card-price">${escapeHtml(ad.price)}</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">${escapeHtml(ad.details)}</p>
+                    <div class="card-actions">
+                        <a href="https://wa.me/${escapeHtml(ad.phone)}?text=${encodeURIComponent('أهلاً، أرغب بالاستفسار عن المشروع: ' + ad.title)}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل عبر الواتساب</a>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function filterDealsAds() {
+        function filterDeals() {
             const feed = document.getElementById('dealsFeed');
-            feed.innerHTML = allAdsCache.map(ad => `
+            if(!allAds.length) {
+                feed.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--text-sub);"><p>لا توجد عروض مضافة حالياً.</p></div>';
+                return;
+            }
+            feed.innerHTML = allAds.map(ad => `
                 <div class="ad-card" style="border-right: 4px solid var(--accent-gold);">
                     <div class="card-header">
                         <span class="card-title">${escapeHtml(ad.title)}</span>
                         <span class="card-price" style="color: var(--accent-gold);">${escapeHtml(ad.price)}</span>
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--text-sub);">${escapeHtml(ad.details)}</p>
-                    <div class="card-actions" style="margin-top: 8px;">
+                    <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 8px;">${escapeHtml(ad.details)}</p>
+                    <div class="card-actions">
                         <a href="https://wa.me/${escapeHtml(ad.phone)}" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> حجز العرض</a>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Add Ad Form Submit
         document.getElementById('addForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const newAd = {
+            const body = {
                 title: document.getElementById('title').value,
                 category: document.getElementById('category').value,
                 price: document.getElementById('price').value,
                 phone: document.getElementById('phone').value,
                 details: document.getElementById('details').value
             };
-
             try {
                 const res = await fetch('/api/ads', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newAd)
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(body)
                 });
                 if(res.ok) {
                     alert('✅ تم نشر الإعلان بنجاح!');
                     document.getElementById('addForm').reset();
-                    fetchAds();
+                    await fetchAds();
                     switchPage('pageHome', document.querySelectorAll('.nav-item')[0]);
                 }
             } catch(err) {
-                alert('❌ حدث خطأ أثناء النشر.');
+                alert('❌ حدث خطأ في النشر');
             }
-        });
-
-        // Network Status Detect
-        window.addEventListener('online', () => {
-            document.getElementById('offlineBanner').style.display = 'none';
-            fetchAds();
-        });
-        window.addEventListener('offline', () => {
-            document.getElementById('offlineBanner').style.display = 'block';
         });
 
         function escapeHtml(str) {
             return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
         }
 
-        // Initial Load
         fetchAds();
     </script>
 </body>
