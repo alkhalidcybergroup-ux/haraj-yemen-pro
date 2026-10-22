@@ -192,7 +192,7 @@
                 if(data.listing.status === 'pending_payment') {
                     alert('تم إرسال إعلانك بنجاح! سيتم مراجعة إيصال التحويل عبر محفظة جيب وتفعيله في البانر المتحرك قريباً.');
                 } else {
-                    alert('تم نشر إعلانك بنجاح!');
+                    showToast('تم نشر إعلانك بنجاح! 🎉');
                 }
                 closePostModal();
                 document.addEventListener("DOMContentLoaded", () => { loadData(); });
@@ -202,6 +202,22 @@
         let allListings = [];
         let carouselIndex = 0;
         let carouselTimer = null;
+
+        
+        function showToast(message) {
+            let toast = document.getElementById("toastNotification");
+            if(!toast) {
+                toast = document.createElement("div");
+                toast.id = "toastNotification";
+                toast.className = "fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl z-50 text-sm font-bold transition-all duration-300 opacity-0 pointer-events-none";
+                document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            toast.classList.remove("opacity-0", "pointer-events-none");
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "pointer-events-none");
+            }, 3000);
+        }
 
         async function loadData() {
             const res = await fetch('/api/data');
