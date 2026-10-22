@@ -25,7 +25,7 @@
         </div>
         <div class="flex items-center gap-3">
             <button onclick="openAuthModal()" id="authBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2 rounded-xl font-bold text-sm transition">تسجيل الدخول</button>
-            <button onclick="openPostModal()" class="cheerful-gradient text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/20 hover:opacity-95 transition">+ أضف إعلان</button>
+            <button onclick="event.stopPropagation(); openPostModal();" class="cheerful-gradient text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/20 hover:opacity-95 transition">+ أضف إعلان</button>
         </div>
     </nav>
 
@@ -195,7 +195,7 @@
                     alert('تم نشر إعلانك بنجاح!');
                 }
                 closePostModal();
-                loadData();
+                document.addEventListener("DOMContentLoaded", () => { loadData(); });
             }
         };
 
@@ -305,5 +305,13 @@
 
         loadData();
     </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('Service Worker Registered'));
+        }
+    </script>
 </body>
+
 </html>
