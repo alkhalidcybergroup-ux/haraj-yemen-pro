@@ -6,8 +6,7 @@
     <title>حراج اليمن Pro</title>
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#0d1424">
-    <!-- Google AdSense Placeholder / Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
     <style>
         :root {
             --bg-main: #0a0e17;
@@ -17,251 +16,239 @@
             --text-main: #ffffff;
             --text-sub: #94a3b8;
             --border-color: #1e293b;
-            --badge-blue: #3b82f6;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg-main); color: var(--text-main); padding-bottom: 75px; }
 
-        /* Header */
         header {
             background-color: #0f172a;
-            padding: 14px 18px;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
         }
-        .logo-container { display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 1.2rem; }
-        .logo-icon { color: var(--accent-green); font-size: 1.4rem; }
-        .verified-badge { color: var(--badge-blue); font-size: 1rem; }
-        .lang-select { color: #e2e8f0; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; }
+        .logo-container { display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 1.1rem; }
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .settings-btn { background: none; border: none; color: #fff; font-size: 1.3rem; cursor: pointer; }
 
-        /* Container */
         .container { padding: 15px; max-width: 600px; margin: 0 auto; }
-
-        /* Card System */
         .card {
             background-color: var(--bg-card);
-            border: 1px solid #1e293b;
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        }
-        .card-header-tag {
-            display: inline-block;
-            background: #1e293b;
-            color: var(--badge-blue);
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-        }
-
-        .dev-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 6px; }
-        .dev-sub { color: var(--accent-green); font-size: 0.9rem; margin-bottom: 12px; }
-        .dev-desc { color: var(--text-sub); font-size: 0.85rem; line-height: 1.5; margin-bottom: 16px; }
-
-        .btn-group { display: flex; gap: 10px; }
-        .btn-action {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            text-decoration: none;
-        }
-        .btn-green { background-color: var(--accent-green); color: #000; }
-        .btn-dark { background-color: #1e293b; color: #fff; border: 1px solid #334155; }
-        .btn-blue { background-color: var(--accent-blue); color: #fff; width: 100%; }
-
-        /* Navigation Bar */
-        .nav-bar {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background-color: #0f172a;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            border-top: 1px solid var(--border-color);
-            z-index: 1000;
-        }
-        .nav-item {
-            color: var(--text-sub);
-            text-decoration: none;
-            font-size: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-        }
-        .nav-item.active { color: var(--accent-green); font-weight: bold; }
-        .nav-icon { font-size: 1.2rem; }
-
-        /* Forms */
-        .form-group { margin-bottom: 14px; }
-        .form-group label { display: block; margin-bottom: 6px; color: var(--text-sub); font-size: 0.85rem; }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 12px; border-radius: 8px;
-            border: 1px solid #1e293b; background: #0b1120; color: #fff; font-size: 0.9rem;
-        }
-
-        /* AdSense Container */
-        .adsense-box {
-            background: #0f172a;
-            border: 1px dashed #334155;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
             margin-bottom: 15px;
         }
+        .ad-img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+        .price { color: var(--accent-green); font-weight: bold; font-size: 1.1rem; margin: 6px 0; }
+        
+        .btn-action {
+            width: 100%; padding: 10px; border-radius: 8px; border: none;
+            font-weight: bold; cursor: pointer; background-color: var(--accent-blue); color: #fff;
+            margin-top: 8px; text-decoration: none; display: inline-block; text-align: center;
+        }
+
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background-color: #0f172a; display: flex; justify-content: space-around;
+            padding: 8px 0; border-top: 1px solid var(--border-color); z-index: 1000;
+        }
+        .nav-item { color: var(--text-sub); font-size: 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+        .nav-item.active { color: var(--accent-green); font-weight: bold; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 5px; color: var(--text-sub); font-size: 0.85rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 10px; border-radius: 8px;
+            border: 1px solid var(--border-color); background: #0b1120; color: #fff;
+        }
+
+        /* Modal for Developer Profile */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; padding: 15px; }
+        .modal-content { background: var(--bg-card); border-radius: 12px; padding: 20px; max-width: 500px; width: 100%; position: relative; }
+        .close-btn { position: absolute; top: 10px; left: 15px; font-size: 1.5rem; color: var(--text-sub); cursor: pointer; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-container">
-        <span class="logo-icon">🏪</span>
-        <span>حراج اليمن Pro</span>
-        <span class="verified-badge">✔</span>
+        <span>🏪 حراج اليمن Pro</span>
+        <span style="color:#3b82f6;">✔</span>
     </div>
-    <div class="lang-select">🌐 الدولي</div>
+    <div class="header-actions">
+        <span>🌐 الدولي</span>
+        <button class="settings-btn" onclick="openDevModal()" title="إعدادات المطور">⚙️</button>
+    </div>
 </header>
 
 <div class="container" id="main-view">
-    <!-- AdSense Banner -->
-    <div class="adsense-box">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-             data-ad-slot="1234567890"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <!-- AdSense Slot -->
+    <div style="background:#0f172a; border:1px dashed #334155; padding:8px; text-align:center; color:#64748b; font-size:0.75rem; margin-bottom:12px;">
         إعلان Google
     </div>
 
-    <!-- Dev Section Default -->
-    <div class="card">
-        <span class="card-header-tag">&lt;/&gt; المطور والمهندس المعتمد</span>
-        <div class="dev-title">المهندس: زيد الحمزي</div>
-        <div class="dev-sub">تصميم وتطوير المنصات والأنظمة البرمجية 🚀</div>
-        <div class="dev-desc">
-            نقدم خدمات تصميم وتطوير تطبيقات الويب، أنظمة المبيعات POS، سكريبتات شبكات MikroTik المخصصة، وتصميم حلول برمجية متكاملة للشركات والأفراد برؤية دولية حديثة.
-        </div>
-        <div class="btn-group">
-            <a href="https://wa.me/96770000000" class="btn-action btn-green">💬 طلب مشروع خاص</a>
-            <a href="tel:96770000000" class="btn-action btn-dark">📞 اتصل الآن</a>
-        </div>
-    </div>
-
-    <h3 style="margin: 20px 0 10px 0; font-size: 1rem; color: var(--text-sub);">مشاريع وسكريبتات المطورين</h3>
-    <div style="text-align: center; color: #64748b; padding: 30px 0;">لا توجد مشاريع إضافية حالياً.</div>
+    <h3 style="margin-bottom:12px;">📢 أحدث الإعلانات</h3>
+    <div id="ads-list"></div>
 </div>
 
 <nav class="nav-bar">
-    <div class="nav-item active" onclick="switchTab('main')">
-        <span class="nav-icon">🏠</span>
-        <span>الرئيسية</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('offers')">
-        <span class="nav-icon">🏷️</span>
-        <span>العروض</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('add')">
-        <span class="nav-icon">➕</span>
-        <span>أضف</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('devs')">
-        <span class="nav-icon">&lt;/&gt;</span>
-        <span>المطورين</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('stores')">
-        <span class="nav-icon">🏪</span>
-        <span>المتاجر</span>
-    </div>
+    <div class="nav-item active" onclick="switchTab('main', this)"><span>🏠</span><span>الرئيسية</span></div>
+    <div class="nav-item" onclick="switchTab('offers', this)"><span>🏷️</span><span>العروض</span></div>
+    <div class="nav-item" onclick="switchTab('add', this)"><span>➕</span><span>أضف</span></div>
+    <div class="nav-item" onclick="switchTab('devs', this)"><span>&lt;/&gt;</span><span>المطورين</span></div>
+    <div class="nav-item" onclick="switchTab('stores', this)"><span>🏪</span><span>المتاجر</span></div>
 </nav>
 
+<!-- Modal Profile -->
+<div class="modal" id="devModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeDevModal()">&times;</span>
+        <h3 style="color:#2563eb; margin-bottom:8px;">&lt;/&gt; المطور والمهندس المعتمد</h3>
+        <h4>المهندس: زيد الحمزي</h4>
+        <p style="color:#10b981; font-size:0.85rem; margin:6px 0;">تصميم وتطوير المنصات والأنظمة البرمجية 🚀</p>
+        <p style="color:#94a3b8; font-size:0.85rem; line-height:1.4;">نقوم بتصميم وتطوير تطبيقات الويب، أنظمة المبيعات POS، وسكريبتات شبكات MikroTik المخصصة.</p>
+        <div style="margin-top:15px; display:flex; gap:8px;">
+            <a href="https://wa.me/96770000000" class="btn-action" style="background:#10b981;">💬 طلب مشروع</a>
+            <a href="tel:96770000000" class="btn-action" style="background:#1e293b;">📞 اتصل الآن</a>
+        </div>
+    </div>
+</div>
+
 <script>
-    function switchTab(tab) {
+    let adsData = JSON.parse(localStorage.getItem('yemen_ads') || '[]');
+
+    if(adsData.length === 0) {
+        adsData = [
+            { id: 1, title: 'تويوتا كامري 2021 فل كامل', category: 'main', price: '11,500 $', phone: '96770000000', desc: 'سيارة خالية من الحوادث نفل جديد', img: 'https://via.placeholder.com/400x200/121a2d/ffffff?text=Toyota+Camry' },
+            { id: 2, title: 'سكريبت إدارة شبكات الميكروتك Pro', category: 'devs', price: '150 $', phone: '96770000000', desc: 'سكريبت تلقائي لإدارة المبيعات والكروت', img: 'https://via.placeholder.com/400x200/121a2d/ffffff?text=MikroTik+Script' }
+        ];
+        localStorage.setItem('yemen_ads', JSON.stringify(adsData));
+    }
+
+    function renderAds(category = 'all') {
+        const listContainer = document.getElementById('ads-list');
+        if(!listContainer) return;
+
+        let filtered = adsData;
+        if(category !== 'all') {
+            filtered = adsData.filter(item => item.category === category);
+        }
+
+        if(filtered.length === 0) {
+            listContainer.innerHTML = '<div style="text-align:center; color:#64748b; padding:20px;">لا توجد إعلانات في هذا القسم حالياً.</div>';
+            return;
+        }
+
+        listContainer.innerHTML = filtered.map(ad => `
+            <div class="card">
+                ${ad.img ? `<img src="${ad.img}" class="ad-img" alt="صورة الإعلان">` : ''}
+                <h4>${ad.title}</h4>
+                <div class="price">${ad.price}</div>
+                <p style="color:#94a3b8; font-size:0.85rem; margin:6px 0;">${ad.desc}</p>
+                <a href="https://wa.me/${ad.phone}" class="btn-action">💬 تواصل عبر الواتساب</a>
+            </div>
+        `).join('');
+    }
+
+    function switchTab(tab, element) {
         document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        if(element) element.classList.add('active');
+
         const view = document.getElementById('main-view');
 
-        if (tab === 'main' || tab === 'devs') {
-            location.reload();
+        if (tab === 'main') {
+            view.innerHTML = `
+                <div style="background:#0f172a; border:1px dashed #334155; padding:8px; text-align:center; color:#64748b; font-size:0.75rem; margin-bottom:12px;">إعلان Google</div>
+                <h3 style="margin-bottom:12px;">📢 أحدث الإعلانات</h3>
+                <div id="ads-list"></div>
+            `;
+            renderAds('all');
+        } else if (tab === 'offers') {
+            view.innerHTML = `<h3 style="margin-bottom:12px;">🏷️ العروض الحصرية</h3><div id="ads-list"></div>`;
+            renderAds('offers');
+        } else if (tab === 'devs') {
+            view.innerHTML = `<h3 style="margin-bottom:12px;">🛠️ مشاريع وسكريبتات المطورين</h3><div id="ads-list"></div>`;
+            renderAds('devs');
+        } else if (tab === 'stores') {
+            view.innerHTML = `
+                <h3 style="margin-bottom:12px;">🏪 المتاجر الموثوقة</h3>
+                <div class="card" style="text-align:center; padding:20px;">
+                    <div style="font-size:2.5rem;">👤🛡️</div>
+                    <h4>حساب تاجر / مطور موثق</h4>
+                    <p style="color:#94a3b8; font-size:0.85rem; margin:8px 0;">قم بتوثيق حسابك لزيادة مبيعاتك الحصول على العلامة الزرقاء.</p>
+                    <button class="btn-action" onclick="alert('طلبك قيد المراجعة')">طلب توثيق متجر</button>
+                </div>
+            `;
         } else if (tab === 'add') {
-            event.currentTarget.classList.add('active');
             view.innerHTML = `
                 <div class="card">
-                    <h3 style="margin-bottom:15px;">➕ نشر إعلان / مشروع جديد</h3>
-                    <form onsubmit="handleForm(event)">
-                        <div class="form-group">
-                            <label>عنوان الإعلان أو المشروع</label>
-                            <input type="text" placeholder="مثال: جهاز آيفون / سكريبت مخصص" required>
-                        </div>
+                    <h3 style="margin-bottom:12px;">➕ نشر إعلان جديد</h3>
+                    <form onsubmit="saveAd(event)">
+                        <div class="form-group"><label>عنوان الإعلان</label><input type="text" id="adTitle" required></div>
                         <div class="form-group">
                             <label>القسم</label>
-                            <select>
-                                <option>🛠️ هاب المطورين والتقنية</option>
-                                <option>🚗 السيارات والسيارات</option>
-                                <option>📱 الهواتف والإلكترونيات</option>
+                            <select id="adCategory">
+                                <option value="main">📢 حراج عام / رئيسي</option>
+                                <option value="devs">🛠️ هاب المطورين والتقنية</option>
+                                <option value="offers">🏷️ العروض والتخفيضات</option>
                             </select>
                         </div>
+                        <div class="form-group"><label>السعر ($)</label><input type="text" id="adPrice" required></div>
+                        <div class="form-group"><label>رقم التواصل (الواتساب)</label><input type="text" id="adPhone" required placeholder="9677XXXXXXXX"></div>
                         <div class="form-group">
-                            <label>السعر</label>
-                            <input type="text" placeholder="$100" required>
+                            <label>صورة الإعلان (اختر من الهاتف) 📸</label>
+                            <input type="file" id="adImage" accept="image/*" onchange="previewImage(event)">
+                            <img id="imgPreview" style="display:none; width:100%; max-height:180px; object-fit:cover; margin-top:8px; border-radius:6px;">
                         </div>
-                        <div class="form-group">
-                            <label>رقم الواتساب / الهاتف</label>
-                            <input type="text" placeholder="9677XXXXXXXX" required>
-                        </div>
-                        <div class="form-group">
-                            <label>التفاصيل والتقنيات</label>
-                            <textarea rows="4" placeholder="اكتب تفاصيل الإعلان..."></textarea>
-                        </div>
-                        <button type="submit" class="btn-action btn-blue">✈️ نشر فوراً</button>
+                        <div class="form-group"><label>التفاصيل</label><textarea id="adDesc" rows="3" required></textarea></div>
+                        <button type="submit" class="btn-action" style="background:#10b981;">🚀 نشر فوراً</button>
                     </form>
-                </div>
-            `;
-        } else if (tab === 'stores') {
-            event.currentTarget.classList.add('active');
-            view.innerHTML = `
-                <h3 style="margin-bottom:15px;">🏪 المتاجر الموثوقة والشركات</h3>
-                <div class="card" style="text-align:center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: var(--accent-blue); margin-bottom:10px;">👤🛡️</div>
-                    <h4 style="margin-bottom:8px;">حساب تاجر / مطور موثق</h4>
-                    <p style="color:var(--text-sub); font-size:0.85rem; margin-bottom:20px;">قم بتوثيق حسابك للحصول على العلامة الزرقاء وزيادة مبيعاتك.</p>
-                    <button class="btn-action btn-blue" onclick="alert('جاري معالجة طلب التوثيق...')">طلب توثيق متجر</button>
-                </div>
-            `;
-        } else if (tab === 'offers') {
-            event.currentTarget.classList.add('active');
-            view.innerHTML = `
-                <h3 style="margin-bottom:15px;">🏷️ العروض الحصرية</h3>
-                <div class="card">
-                    <h4>عرض خاص على سكريبتات MikroTik</h4>
-                    <p style="color:var(--text-sub); font-size:0.85rem; margin-top:5px;">خصم 20% على إعداد وتأمين الشبكات المحلية.</p>
                 </div>
             `;
         }
     }
 
-    function handleForm(e) {
-        e.preventDefault();
-        alert('تم ارسال الإعلان بنجاح ومراجعته!');
+    let uploadedImgBase64 = '';
+    function previewImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImgBase64 = e.target.result;
+                const img = document.getElementById('imgPreview');
+                img.src = uploadedImgBase64;
+                img.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
     }
+
+    function saveAd(e) {
+        e.preventDefault();
+        const newAd = {
+            id: Date.now(),
+            title: document.getElementById('adTitle').value,
+            category: document.getElementById('adCategory').value,
+            price: document.getElementById('adPrice').value,
+            phone: document.getElementById('adPhone').value,
+            desc: document.getElementById('adDesc').value,
+            img: uploadedImgBase64 || 'https://via.placeholder.com/400x200/121a2d/ffffff?text=Haraj+Yemen'
+        };
+
+        adsData.unshift(newAd);
+        localStorage.setItem('yemen_ads', JSON.stringify(adsData));
+        alert('تم نشر الإعلان بنجاح!');
+        switchTab('main', document.querySelectorAll('.nav-item')[0]);
+    }
+
+    function openDevModal() { document.getElementById('devModal').style.display = 'flex'; }
+    function closeDevModal() { document.getElementById('devModal').style.display = 'none'; }
+
+    // Initial Load
+    renderAds('all');
 </script>
 </body>
 </html>
