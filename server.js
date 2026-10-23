@@ -4,11 +4,17 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
+// معالجة بيانات الطلبات
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// تحديد مجلد الملفات الثابتة
 app.use(express.static(path.join(__dirname, 'public')));
 
+// قاعدة بيانات مؤقتة
 let adsDatabase = [];
 
+// API الإعلانات
 app.get('/api/ads', (req, res) => {
     res.json(adsDatabase);
 });
@@ -31,10 +37,11 @@ app.post('/api/verify', (req, res) => {
     res.json({ success: true, message: 'تم استلام طلب التوثيق بنجاح! سيتم مراجعته والتواصل معكم.' });
 });
 
+// المسار الرئيسي لتشغيل الصفحة
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
