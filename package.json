@@ -1,14 +1,12 @@
 {
   "name": "haraj-yemen-pro",
-  "version": "2.0.0",
-  "description": "Haraj Yemen Pro Super App",
+  "version": "1.0.0",
+  "description": "Haraj Yemen Pro Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mongoose": "^8.0.0"
+    "express": "^4.18.2"
   }
 }
