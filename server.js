@@ -1,59 +1,69 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
 const cors = require('cors');
+const https = require('https');
+const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 app.use(cors());
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://jdjdjshsvhdhdhejej_db_user:z3ifoHkRH0gfriLyz@cluster0.p0qsokq.mongodb.net/haraj_yemen?retryWrites=true&w=majority";
+// قاعدة بيانات مؤقتة في الذاكرة (أو ربطها بـ MongoDB)
+let adsDatabase = [];
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('✅ MongoDB Connected Successfully'))
-  .catch(err => console.error('❌ MongoDB Connection Error:', err));
-
-const adSchema = new mongoose.Schema({
-  title: String,
-  price: String,
-  currency: String,
-  category: String,
-  city: String,
-  phone: String,
-  details: String,
-  image: String,
-  isFeatured: Boolean,
-  createdAt: { type: Date, default: Date.now }
+// API لجلب الإعلانات
+app.get('/api/ads', (req, res) => {
+    res.json(adsDatabase);
 });
 
-const Ad = mongoose.model('Ad', adSchema);
+// API لإضافة إعلان جديد
+app.post('/api/ads', (req, res) => {
+    const { title, category, price, phone, details } = req.body;
+    
+    if (!title || !price || !phone || !details) {
+        return res.status(400).json({ error: 'جميع الحقول مطلوبة' });
+    }
 
-app.get('/api/ads', async (req, res) => {
-  try {
-    const ads = await Ad.find().sort({ createdAt: -1 });
-    res.json(ads);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch ads' });
-  }
+    const newAd = {
+        id: Date.now(),
+        title,
+        category: category || 'عام',
+        price,
+        phone,
+        details,
+        createdAt: new Date()
+    };
+
+    adsDatabase.unshift(newAd);
+    res.status(201).json({ success: true, message: 'تم نشر الإعلان بنجاح', ad: newAd });
 });
 
-app.post('/api/ads', async (req, res) => {
-  try {
-    const newAd = new Ad(req.body);
-    await newAd.save();
-    res.status(201).json(newAd);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to create ad' });
-  }
+// API لطلب توثيق المتجر
+app.post('/api/verify', (req, res) => {
+    const { storeName, phone } = req.body;
+    if (!storeName || !phone) {
+        return res.status(400).json({ error: 'يرجى إدخال اسم المتجر ورقم الهاتف' });
+    }
+    res.json({ success: true, message: 'تم استلام طلب التوثيق بنجاح! سيتم مراجعته والتواصل معكم.' });
 });
 
+// إعادة توجيه كافة المسارات لصفحة index.html (PWA Support)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+// منع خادم Render من النوم (Keep-Alive Self-Ping)
+const RENDER_URL = 'https://haraj-yemen-pro.onrender.com';
+setInterval(() => {
+    https.get(RENDER_URL, (res) => {
+        console.log(`Keep-Alive Ping Sent - Status: ${res.statusCode}`);
+    }).on('error', (err) => {
+        console.log('Keep-Alive Error:', err.message);
+    });
+}, 10 * 60 * 1000); // كل 10 دقائق
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
